@@ -11,7 +11,6 @@
 ![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows-8a9a5b)
 ![Built with](https://img.shields.io/badge/built%20with-Tauri%202%20%2B%20React%20%2B%20Rust-24292f?logo=rust)
 ![License](https://img.shields.io/badge/license-MIT-a3b18a)
-![AI](https://img.shields.io/badge/AI-%E0%B9%84%E0%B8%A1%E0%B9%88%E0%B9%83%E0%B8%8A%E0%B9%89%20%F0%9F%9A%AB-a3b18a)
 
 **[⬇️ ดาวน์โหลดรีลีสล่าสุด](https://github.com/bvnkfatboy/xhalf-bridge/releases/latest)**
 
@@ -20,8 +19,6 @@
 ---
 
 Xhalf Bridge คือ Desktop Application สำหรับ macOS และ Windows ที่รวมทุกอย่างที่ผู้ใช้ Fujifilm X half ต้องการไว้ในที่เดียว ทำงานออฟไลน์ทั้งหมด: นำเข้าภาพจากการ์ด SD หรือมือถือ จัดอัลบั้มและม้วนฟิล์มดิจิทัล ตกแต่งภาพด้วยฟิล์ม LUT เกรน และพรีเซ็ต ต่อภาพคู่แบบ Half Frame ทำคอนแทกต์ชีต สำรองข้อมูลแบบตรวจสอบ hash และรับภาพจากมือถือผ่าน Wi-Fi ในเครือข่ายเดียวกัน **โดยไม่ต้องติดตั้งแอปมือถือเพิ่ม**
-
-> **Local-first · Offline-first · ไม่ใช้ AI · ไม่มีคลาวด์ · ไม่มีบัญชีผู้ใช้**
 
 ## ✨ ฟีเจอร์เด่น
 
@@ -38,7 +35,7 @@ Xhalf Bridge คือ Desktop Application สำหรับ macOS และ Wi
 - **ลุคฟิล์ม:** **เกรนฟิล์ม** (ปรับปริมาณ + ขนาด), ขอบมืด, ซีดจาง
 - **ฟิล์ม LUT ในตัว 40 แบบ** จากชุด G'MIC — Portra, Ektar, Kodachrome, Velvia, Tri-X, Polaroid, ซิมูเลชัน Fuji X-Trans, ฟิล์มภาพยนตร์ — และ**นำเข้าไฟล์ `.cube` ของตัวเองได้**
 - **พรีเซ็ตฟิล์ม 22 แบบ** พร้อมใช้ + บันทึกพรีเซ็ตของตัวเองได้
-- **ปรับอัตโนมัติ:** วิเคราะห์ histogram แบบคำนวณเชิงคณิตศาสตร์ (ไม่ใช้ AI) ปรับแสง-สีให้สมดุล
+- **ปรับอัตโนมัติ:** วิเคราะห์ histogram แบบคำนวณเชิงคณิตศาสตร์ ปรับแสง-สีให้สมดุล
 - บันทึกแบบ non-destructive, เทียบ before/after, pinch-to-zoom ด้วย trackpad, ส่งออก JPEG เต็มความละเอียด
 
 ### 📁 อัลบั้ม & 🎞 ม้วนฟิล์ม
@@ -110,7 +107,7 @@ xhalf-bridge/
 
 ## 🔒 ความเป็นส่วนตัว
 
-ทุกอย่างประมวลผลในเครื่อง ไม่มีบัญชี ไม่มี analytics ไม่มี API key ไม่ใช้ AI ภาพของคุณจะออกจากเครื่องเฉพาะเมื่อคุณเลือกส่งเองผ่าน**เครือข่ายท้องถิ่นของคุณ**เท่านั้น
+ทุกอย่างประมวลผลในเครื่อง ไม่มีบัญชี ไม่มี analytics ไม่มี API key ภาพของคุณจะออกจากเครื่องเฉพาะเมื่อคุณเลือกส่งเองผ่าน**เครือข่ายท้องถิ่นของคุณ**เท่านั้น
 
 ## 🗺 Roadmap
 

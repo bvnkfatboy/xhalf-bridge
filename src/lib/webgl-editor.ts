@@ -415,7 +415,7 @@ export class EditorRenderer {
 }
 
 /* ------------------------------------------------------------------ */
-/* Auto-enhance — histogram analysis (no AI, deterministic)             */
+/* Auto-enhance — deterministic histogram analysis                      */
 /* ------------------------------------------------------------------ */
 
 export function computeAutoAdjustments(source: HTMLImageElement | ImageBitmap): Partial<EditSettings> {

@@ -11,7 +11,6 @@
 ![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows-8a9a5b)
 ![Built with](https://img.shields.io/badge/built%20with-Tauri%202%20%2B%20React%20%2B%20Rust-24292f?logo=rust)
 ![License](https://img.shields.io/badge/license-MIT-a3b18a)
-![AI](https://img.shields.io/badge/AI-none%20%F0%9F%9A%AB-a3b18a)
 
 **[⬇️ Download the latest release](https://github.com/bvnkfatboy/xhalf-bridge/releases/latest)**
 
@@ -20,8 +19,6 @@
 ---
 
 Xhalf Bridge brings everything a Fujifilm X half shooter needs into one offline desktop app: import photos from your camera's SD card or phone, organize them into albums and digital film rolls, edit them with film LUTs, grain and presets, build half-frame pairs and contact sheets, back everything up hash-verified — and receive photos from your phone over local Wi-Fi with no mobile app at all.
-
-> **Local-first · Offline-first · No AI · No cloud · No account**
 
 ## ✨ Highlights
 
@@ -38,7 +35,7 @@ Xhalf Bridge brings everything a Fujifilm X half shooter needs into one offline 
 - **Film look:** **film grain** (amount + size), vignette, fade
 - **40 built-in film LUTs** from the G'MIC collection — Portra, Ektar, Kodachrome, Velvia, Tri-X, Polaroid, Fuji X-Trans simulations, cinema print — plus **import your own `.cube` files**
 - **22 film presets** ready to go, and save your own
-- **Auto enhance**: deterministic histogram analysis (no AI) applies balanced corrections
+- **Auto enhance**: deterministic histogram analysis applies balanced corrections
 - Non-destructive edits, before/after compare, pinch-to-zoom, full-resolution JPEG export
 
 ### 📁 Albums & 🎞 Film Rolls
@@ -110,7 +107,7 @@ xhalf-bridge/
 
 ## 🔒 Privacy
 
-Everything is processed locally. No account, no analytics, no API keys, no AI. Photos only ever leave your machine when you explicitly send them over **your own local network**.
+Everything is processed locally. No account, no analytics, no API keys. Photos only ever leave your machine when you explicitly send them over **your own local network**.
 
 ## 🗺 Roadmap
 

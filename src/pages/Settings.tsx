@@ -182,7 +182,7 @@ export function Settings() {
         </section>
 
         <p className="pb-4 text-xs leading-relaxed text-muted">
-          {t("Xhalf Bridge works fully offline. No account, no cloud, no AI — your photos never leave this machine except when you explicitly send them over your own local network.")}
+          {t("Your photos stay on this machine. No account, no cloud — nothing is sent anywhere unless you explicitly send files over your own local network.")}
         </p>
       </div>
     </div>

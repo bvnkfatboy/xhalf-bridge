@@ -341,8 +341,8 @@ export const th: Record<string, string> = {
     "คุณค้นหาไฟล์ซ้ำในคลังภาพได้ทุกเมื่อในภายหลัง",
   "Skip the file (recommended)": "ข้ามไฟล์นั้น (แนะนำ)",
   "Keep a copy anyway": "เก็บสำเนาไว้ด้วย",
-  "Xhalf Bridge works fully offline. No account, no cloud, no AI — your photos never leave this machine except when you explicitly send them over your own local network.":
-    "Xhalf Bridge ทำงานออฟไลน์ทั้งหมด ไม่มีบัญชี ไม่มีคลาวด์ ไม่ใช้ AI — ภาพของคุณจะไม่ออกจากเครื่องนี้ เว้นแต่คุณเลือกส่งเองผ่านเครือข่ายท้องถิ่นของคุณ",
+  "Your photos stay on this machine. No account, no cloud — nothing is sent anywhere unless you explicitly send files over your own local network.":
+    "ภาพของคุณอยู่บนเครื่องของคุณ ไม่มีบัญชี ไม่มีคลาวด์ — ไม่มีการส่งข้อมูลไปที่ใด เว้นแต่คุณเลือกส่งไฟล์เองผ่านเครือข่ายท้องถิ่นของคุณ",
 
   // Editor
   "Pick a photo to start editing": "เลือกภาพเพื่อเริ่มตกแต่ง",

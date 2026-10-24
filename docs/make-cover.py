@@ -110,7 +110,7 @@ cb = d.textbbox((0, 0), cap, font=cf)
 d.text(((FX0 + FX1) / 2 - (cb[2] - cb[0]) / 2, FY1 + sc(17)), cap, font=cf, fill=(111, 111, 104))
 
 # ---------- badges ----------
-badges = ["macOS", "Windows", "Local-first", "Offline-first", "No AI"]
+badges = ["macOS", "Windows", "Film LUTs", "Editor", "Wi-Fi Transfer"]
 by, bx = sc(560), sc(90)
 bf = load_font([("/System/Library/Fonts/SFNS.ttf", 0)], 22)
 pad_x = sc(17)
@@ -123,7 +123,7 @@ for label in badges:
     bx = pill[2] + sc(13)
 
 # ---------- footer + version ----------
-d.text((sc(90), sc(712)), "Local-first  ·  Offline-first  ·  No AI  ·  MIT", font=load_font([("/System/Library/Fonts/Menlo.ttc", 0)], 16), fill=(97, 97, 91))
+d.text((sc(90), sc(712)), "Xhalf Bridge  ·  MIT License", font=load_font([("/System/Library/Fonts/Menlo.ttc", 0)], 16), fill=(97, 97, 91))
 ver = "v0.1.0"
 vb = d.textbbox((0, 0), ver, font=load_font([("/System/Library/Fonts/Menlo.ttc", 0)], 16))
 d.text((W - sc(90) - (vb[2] - vb[0]), sc(712)), ver, font=load_font([("/System/Library/Fonts/Menlo.ttc", 0)], 16), fill=OLIVE_DARK)

@@ -59,7 +59,7 @@ export function Sidebar({ view, onNavigate }: { view: ViewKey; onNavigate: (v: V
         ))}
       </nav>
       <div className="border-t border-line px-4 py-3 text-[10px] leading-relaxed text-muted">
-        Local-first · Offline · No AI
+        Made for the Fujifilm X half
       </div>
     </aside>
   );
