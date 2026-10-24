@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface2: var(--surface2);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-ink: var(--accent-ink);
+  --color-danger: var(--danger);
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+
+:root,
+[data-theme="dark"] {
+  --bg: #131415;
+  --surface: #1b1d1f;
+  --surface2: #222527;
+  --line: #2c2f32;
+  --fg: #e8e6e1;
+  --muted: #94948d;
+  --accent: #a3b18a;
+  --accent-strong: #7d8f62;
+  --accent-ink: #14180d;
+  --danger: #cf7961;
+}
+
+[data-theme="light"] {
+  --bg: #f2f1ec;
+  --surface: #fbfaf7;
+  --surface2: #ffffff;
+  --line: #dcdad2;
+  --fg: #23241f;
+  --muted: #6f6f68;
+  --accent: #67783f;
+  --accent-strong: #55642f;
+  --accent-ink: #f4f3ef;
+  --danger: #b04e37;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+input,
+textarea {
+  user-select: text;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 5px;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+/* Cheap virtualization for large grids */
+.content-virtual {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 200px;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}

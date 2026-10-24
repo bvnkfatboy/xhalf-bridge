@@ -1,0 +1,37 @@
+{
+  "name": "xhalf-bridge",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Desktop photo management & wireless transfer for Fujifilm X half",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.5.0",
+    "@tauri-apps/plugin-dialog": "^2.2.0",
+    "@tauri-apps/plugin-opener": "^2.2.6",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.469.0",
+    "qrcode": "^1.5.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@tauri-apps/cli": "^2.5.0",
+    "@types/qrcode": "^1.5.5",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.6.3",
+    "vite": "^6.0.3",
+    "vitest": "^2.1.8"
+  }
+}

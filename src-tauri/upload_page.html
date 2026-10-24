@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<title>Xhalf Bridge — Send Photos</title>
+<style>
+  :root {
+    --bg: #17181a; --panel: #1f2124; --line: #2c2e31;
+    --fg: #e8e6e1; --muted: #9a9a94; --accent: #a3b18a; --accent-ink: #1d2416;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--fg); min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    padding: max(20px, env(safe-area-inset-top)) 20px 40px;
+    max-width: 560px; margin: 0 auto;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .logo .mark {
+    width: 34px; height: 34px; border-radius: 8px; background: var(--accent);
+    color: var(--accent-ink); display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  h1 { font-size: 20px; font-weight: 700; }
+  .sub { color: var(--muted); font-size: 13px; margin-bottom: 22px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px; margin-bottom: 14px; }
+  .hidden { display: none !important; }
+  input[type=text] {
+    width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--line);
+    background: var(--bg); color: var(--fg); font-size: 16px; outline: none; margin-bottom: 10px;
+  }
+  input[type=text]:focus { border-color: var(--accent); }
+  button {
+    width: 100%; padding: 13px; border: none; border-radius: 10px; background: var(--accent);
+    color: var(--accent-ink); font-size: 15px; font-weight: 700; cursor: pointer;
+  }
+  button:disabled { opacity: 0.45; cursor: default; }
+  button.secondary { background: transparent; color: var(--fg); border: 1px solid var(--line); font-weight: 600; }
+  .dropzone { text-align: center; padding: 26px 12px; border: 2px dashed var(--line); border-radius: 12px; cursor: pointer; }
+  .dropzone strong { display: block; font-size: 15px; margin-bottom: 4px; }
+  .dropzone span { color: var(--muted); font-size: 13px; }
+  .file { padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .file:last-child { border-bottom: none; }
+  .file .row { display: flex; justify-content: space-between; gap: 10px; font-size: 14px; margin-bottom: 6px; }
+  .file .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .file .status { flex-shrink: 0; font-size: 12px; color: var(--muted); }
+  .file .status.ok { color: var(--accent); }
+  .file .status.err { color: #d98a7a; }
+  .bar { height: 4px; border-radius: 2px; background: var(--line); overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 0%; background: var(--accent); transition: width .15s; }
+  .summary { font-size: 13px; color: var(--muted); text-align: center; margin-top: 4px; }
+  .note { font-size: 12px; color: var(--muted); line-height: 1.5; margin-top: 10px; }
+</style>
+</head>
+<body>
+  <div class="logo"><div class="mark">X½</div><h1>Xhalf Bridge</h1></div>
+  <p class="sub">Send photos from this phone to your computer over Wi-Fi.</p>
+
+  <div id="tokenCard" class="card hidden">
+    <div class="row" style="margin-bottom:12px;font-size:14px;font-weight:600">Enter the pairing token shown on your computer</div>
+    <input type="text" id="tokenInput" placeholder="Pairing token" autocapitalize="off" autocorrect="off" autocomplete="off">
+    <button id="tokenBtn">Connect</button>
+  </div>
+
+  <div id="mainCard" class="card hidden">
+    <div class="dropzone" id="dropzone">
+      <strong>Tap to choose photos</strong>
+      <span>JPEG / PNG — multiple files supported</span>
+    </div>
+    <input type="file" id="fileInput" accept="image/jpeg,image/png,.jpg,.jpeg,.png" multiple class="hidden">
+    <div id="fileList" style="margin-top:10px"></div>
+    <div style="margin-top:14px;display:flex;flex-direction:column;gap:8px">
+      <button id="sendBtn" disabled>Send</button>
+      <div class="summary" id="summary"></div>
+    </div>
+    <p class="note">Files are sent directly to your computer on this local network. Nothing is uploaded to the internet. Original photos on this phone are never deleted.</p>
+  </div>
+
+<script>
+(function () {
+  var params = new URLSearchParams(location.search);
+  var token = params.get('t') || '';
+  var maxFileMb = 100, maxFiles = 500;
+  var $ = function (id) { return document.getElementById(id); };
+
+  function showToken() { $('tokenCard').classList.remove('hidden'); $('mainCard').classList.add('hidden'); }
+  function showMain() { $('tokenCard').classList.add('hidden'); $('mainCard').classList.remove('hidden'); }
+
+  fetch('/api/info?t=' + encodeURIComponent(token))
+    .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+    .then(function (res) {
+      if (res.ok && res.j.ok) {
+        maxFileMb = res.j.maxFileMb || 100;
+        maxFiles = res.j.maxFiles || 500;
+        showMain();
+      } else {
+        showToken();
+      }
+    })
+    .catch(function () { showToken(); });
+
+  $('tokenBtn').addEventListener('click', function () {
+    var t = $('tokenInput').value.trim();
+    if (t) location.href = '/?t=' + encodeURIComponent(t);
+  });
+
+  var files = [];
+  var dropzone = $('dropzone'), fileInput = $('fileInput');
+  dropzone.addEventListener('click', function () { fileInput.click(); });
+  fileInput.addEventListener('change', function () { setFiles(fileInput.files); });
+
+  function fmtSize(n) {
+    if (n > 1048576) return (n / 1048576).toFixed(1) + ' MB';
+    if (n > 1024) return (n / 1024).toFixed(0) + ' KB';
+    return n + ' B';
+  }
+
+  function setFiles(list) {
+    files = Array.prototype.slice.call(list);
+    var html = '';
+    for (var i = 0; i < files.length; i++) {
+      html += '<div class="file" data-i="' + i + '">' +
+        '<div class="row"><span class="name">' + escapeHtml(files[i].name) + '</span>' +
+        '<span class="status" id="st-' + i + '">' + fmtSize(files[i].size) + '</span></div>' +
+        '<div class="bar"><i id="bar-' + i + '"></i></div></div>';
+    }
+    $('fileList').innerHTML = html;
+    $('sendBtn').disabled = files.length === 0;
+    $('sendBtn').textContent = files.length > 1 ? 'Send ' + files.length + ' photos' : 'Send photo';
+    $('summary').textContent = '';
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function uploadOne(file, i) {
+    return new Promise(function (resolve) {
+      if (file.size > maxFileMb * 1048576) {
+        $('st-' + i).textContent = 'Too large (max ' + maxFileMb + ' MB)';
+        $('st-' + i).className = 'status err';
+        resolve(false);
+        return;
+      }
+      var fd = new FormData();
+      fd.append('files', file, file.name);
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', '/api/upload?t=' + encodeURIComponent(token));
+      xhr.upload.onprogress = function (e) {
+        if (e.lengthComputable) {
+          var pct = Math.round((e.loaded / e.total) * 100);
+          $('bar-' + i).style.width = pct + '%';
+          $('st-' + i).textContent = pct + '%';
+        }
+      };
+      xhr.onload = function () {
+        var j = {};
+        try { j = JSON.parse(xhr.responseText); } catch (e) { j = { ok: false, error: 'bad response' }; }
+        var st = $('st-' + i);
+        if (j.ok && j.saved) { st.textContent = 'Sent ✓'; st.className = 'status ok'; $('bar-' + i).style.width = '100%'; resolve(true); }
+        else if (j.status === 'duplicate') { st.textContent = 'Duplicate (skipped)'; st.className = 'status ok'; $('bar-' + i).style.width = '100%'; resolve(true); }
+        else { st.textContent = j.error || 'Failed'; st.className = 'status err'; resolve(false); }
+      };
+      xhr.onerror = function () {
+        $('st-' + i).textContent = 'Network error';
+        $('st-' + i).className = 'status err';
+        resolve(false);
+      };
+      xhr.send(fd);
+    });
+  }
+
+  $('sendBtn').addEventListener('click', function () {
+    if (!files.length) return;
+    $('sendBtn').disabled = true;
+    var i = 0, sent = 0, failed = 0;
+    function next() {
+      if (i >= files.length) {
+        $('summary').textContent = 'Done — ' + sent + ' sent' + (failed ? ', ' + failed + ' failed' : '');
+        $('sendBtn').textContent = 'Send more photos';
+        $('sendBtn').disabled = false;
+        fileInput.value = '';
+        return;
+      }
+      var idx = i++;
+      uploadOne(files[idx], idx).then(function (ok) { if (ok) sent++; else failed++; next(); });
+    }
+    next();
+  });
+})();
+</script>
+</body>
+</html>

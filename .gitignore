@@ -1,0 +1,9 @@
+node_modules
+dist
+dist-ssr
+*.local
+src-tauri/target
+.DS_Store
+*.log
+// gen dir ignore
+/src-tauri/gen/
